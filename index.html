@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#FAF9F8">
   <title>차제욱 & 신지혜 결혼합니다</title>
   
   <meta property="og:type" content="website">
@@ -12,282 +11,241 @@
   <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80">
 
   <style>
-    /* 프레이머 감성의 웹 폰트 (본문: 프리텐다드, 제목: 얇은 나눔명조/노토세리프) */
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&family=Pretendard:wght@200;300;400;500&display=swap');
+    /* 폰트: 얇고 고급스러운 프리텐다드 */
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
-      font-family: 'Pretendard', sans-serif;
-      background-color: #FAF9F8; /* 프레이머에서 자주 쓰는 따뜻한 크림/화이트 톤 */
-      color: #33322E; /* 완전한 검은색이 아닌 고급스러운 다크 브라운/그레이 */
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      background-color: #ffffff; /* 프레이머 원본과 동일한 완전한 화이트 */
+      color: #333333;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      line-height: 1.8;
+      line-height: 1.6;
     }
 
-    .font-serif { font-family: 'Noto Serif KR', serif; }
-
-    /* 모바일 중앙 정렬 캔버스 */
-    .mobile-wrap {
+    .container {
       max-width: 480px;
       margin: 0 auto;
-      background-color: #FAF9F8;
-      min-height: 100vh;
-      box-shadow: 0 0 30px rgba(0,0,0,0.03);
-      padding-bottom: 100px;
+      background-color: #ffffff;
+      padding-bottom: 120px;
     }
 
-    /* === 프레이머 시그니처 스크롤 애니메이션 (핵심) === */
-    /* 프레이머 특유의 부드러운 텐션을 위해 cubic-bezier 조정 */
-    .framer-fade {
+    /* 프레이머 원본 스타일의 스크롤 페이드 애니메이션 */
+    .fade-up {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-                  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
+      transform: translateY(25px);
+      transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .framer-fade.visible {
+    .fade-up.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* === 1. 커버 섹션 === */
-    .cover-section { padding: 40px 24px; text-align: center; }
-    .cover-img-wrap {
-      width: 100%;
-      aspect-ratio: 3 / 4;
-      border-radius: 4px;
-      overflow: hidden;
-      margin-bottom: 40px;
-      background-color: #EBEBEB;
-    }
-    .cover-img { width: 100%; height: 100%; object-fit: cover; }
+    /* 1. 메인 커버 */
+    .hero { padding: 40px 24px; text-align: center; }
+    .hero-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 40px; }
+    .hero-year { font-size: 14px; font-weight: 300; letter-spacing: 0.1em; color: #666; margin-bottom: 8px; }
+    .hero-date { font-size: 28px; font-weight: 400; letter-spacing: 0.05em; margin-bottom: 40px; }
+    .hero-info { font-size: 14px; font-weight: 300; color: #555; line-height: 1.8; }
+
+    /* 2. 달력 (Save the date) */
+    .calendar-section { padding: 80px 24px; text-align: center; }
+    .section-subtitle { font-size: 12px; font-weight: 400; color: #999; letter-spacing: 0.1em; margin-bottom: 12px; }
+    .section-title { font-size: 14px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 40px; }
     
-    .cover-date { font-size: 11px; letter-spacing: 0.3em; color: #8A857D; margin-bottom: 16px; font-weight: 300; }
-    .cover-title { font-size: 32px; font-weight: 300; letter-spacing: 0.1em; color: #33322E; margin-bottom: 24px; }
-    .cover-title span { font-size: 18px; margin: 0 12px; color: #A39D93; }
-    .cover-location { font-size: 13px; color: #66645E; font-weight: 300; letter-spacing: 0.05em; }
+    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; text-align: center; font-size: 13px; font-weight: 300; margin-top: 20px; }
+    .cal-header { font-weight: 400; color: #999; margin-bottom: 10px; }
+    .cal-day { padding: 8px 0; color: #555; }
+    .cal-day.sunday { color: #d9534f; }
+    .cal-day.wedding-day { background-color: #f4f4f4; border-radius: 50%; font-weight: 500; color: #111; }
 
-    /* === 2. 인사말 섹션 === */
-    .greeting-section { padding: 120px 30px; text-align: center; }
-    .greeting-text {
-      font-size: 15px; line-height: 2.4; font-weight: 300; color: #4A4843; margin-bottom: 60px;
-    }
+    /* 3. 혼주 정보 (Invitation) */
+    .invitation-section { padding: 60px 24px; text-align: center; }
+    .parents-box { display: flex; justify-content: center; gap: 24px; margin-bottom: 30px; font-weight: 300; font-size: 15px; }
+    .parents-group { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .parents-names { color: #555; }
+    .parents-relation { font-size: 13px; color: #888; }
+    .person-name { font-size: 18px; font-weight: 400; color: #222; margin-top: 4px; }
 
-    .parents-wrap { display: flex; flex-direction: column; gap: 16px; align-items: center; }
-    .parents-row { display: flex; align-items: center; gap: 12px; font-size: 15px; color: #4A4843; font-weight: 300; }
-    .parents-name { width: 100px; text-align: right; letter-spacing: 2px; }
-    .parents-relation { font-size: 13px; color: #8A857D; }
-    .person-name { width: 40px; text-align: left; font-size: 17px; font-weight: 400; }
+    /* 4. 갤러리 (Our moment) */
+    .gallery-section { padding: 60px 0; text-align: center; }
+    .gallery-hint { font-size: 12px; color: #999; margin-bottom: 24px; font-weight: 300; }
+    .gallery-scroll { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 24px 20px 24px; }
+    .gallery-scroll::-webkit-scrollbar { display: none; }
+    .gallery-item { width: 80%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; scroll-snap-align: center; flex-shrink: 0; }
 
-    .contact-btns { display: flex; gap: 8px; margin-top: 50px; justify-content: center; }
-    .btn-line {
-      display: inline-block; padding: 12px 24px; border: 1px solid #D6D3CD; border-radius: 40px;
-      text-decoration: none; color: #66645E; font-size: 12px; font-weight: 400; letter-spacing: 0.05em;
-    }
+    /* 5. 오시는 길 */
+    .location-section { padding: 60px 24px; text-align: center; }
+    .map-img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 16px; background-color: #f5f5f5; }
+    .map-buttons { display: flex; gap: 8px; margin-bottom: 30px; }
+    .map-btn { flex: 1; padding: 12px 0; border: 1px solid #eee; border-radius: 6px; font-size: 13px; text-decoration: none; color: #333; }
+    .parking-info { font-size: 13px; font-weight: 300; color: #666; line-height: 1.8; text-align: left; background: #fafafa; padding: 20px; border-radius: 8px; }
 
-    /* === 3. 갤러리 섹션 === */
-    .section-title {
-      font-size: 10px; text-transform: uppercase; letter-spacing: 0.4em;
-      color: #A39D93; text-align: center; margin-bottom: 40px; font-weight: 400;
-    }
-    .gallery-wrap {
-      display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory;
-      padding: 0 24px 20px 24px; margin-bottom: 120px;
-    }
-    .gallery-wrap::-webkit-scrollbar { display: none; }
-    .gallery-item {
-      width: 280px; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px;
-      scroll-snap-align: center; flex-shrink: 0; background-color: #EBEBEB;
-    }
+    /* 6. 마음 전하실 곳 (Account) */
+    .account-section { padding: 60px 24px; text-align: center; }
+    .account-notice { font-size: 13px; font-weight: 300; color: #666; margin-bottom: 30px; line-height: 1.8; }
+    .account-box { text-align: left; padding: 20px; border: 1px solid #eee; border-radius: 8px; margin-bottom: 12px; }
+    .account-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .account-title { font-size: 13px; font-weight: 400; color: #888; }
+    .copy-btn { padding: 6px 12px; background: #f5f5f5; border: none; border-radius: 4px; font-size: 12px; cursor: pointer; color: #555; }
+    .account-num { font-size: 15px; font-weight: 400; color: #333; margin-bottom: 4px; }
+    .account-name { font-size: 13px; font-weight: 300; color: #777; }
 
-    /* === 4. 오시는 길 === */
-    .map-section { padding: 0 24px; margin-bottom: 120px; text-align: center; }
-    .venue-name { font-size: 18px; font-weight: 400; margin-bottom: 12px; color: #33322E; }
-    .venue-address { font-size: 13px; color: #66645E; font-weight: 300; margin-bottom: 40px; line-height: 1.8; }
-    
-    .map-box {
-      width: 100%; height: 240px; background-color: #EBEBEB; border-radius: 4px;
-      margin-bottom: 16px; display: flex; align-items: center; justify-content: center;
-      color: #A39D93; font-size: 12px; letter-spacing: 0.1em;
-      background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80');
-      background-size: cover; background-position: center;
-    }
-    
-    .map-links { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-    .map-link {
-      padding: 14px 0; background: #fff; border: 1px solid #E6E4E0; border-radius: 4px;
-      text-align: center; text-decoration: none; font-size: 12px; color: #4A4843; font-weight: 400;
-    }
-
-    /* === 5. 마음 전하실 곳 === */
-    .account-section { padding: 0 24px; }
-    .account-notice { font-size: 13px; color: #66645E; font-weight: 300; text-align: center; margin-bottom: 40px; line-height: 1.8; }
-    
-    .account-card {
-      background: #fff; border: 1px solid #E6E4E0; border-radius: 4px;
-      padding: 24px; margin-bottom: 12px;
-    }
-    .account-label { font-size: 11px; color: #A39D93; letter-spacing: 0.1em; margin-bottom: 12px; display: block; }
-    .account-row { display: flex; justify-content: space-between; align-items: center; }
-    .account-num { font-size: 14px; color: #33322E; font-weight: 400; letter-spacing: 0.05em; }
-    .account-name { font-size: 12px; color: #8A857D; margin-top: 6px; display: block; font-weight: 300; }
-    
-    .copy-btn {
-      padding: 8px 16px; background: #FAF9F8; border: 1px solid #E6E4E0; border-radius: 40px;
-      font-size: 11px; color: #66645E; cursor: pointer; letter-spacing: 0.05em;
-    }
+    /* 7. 마무리 문구 */
+    .footer-section { padding: 80px 24px; text-align: center; }
+    .footer-text { font-size: 14px; font-weight: 300; color: #555; line-height: 2; margin-bottom: 40px; }
 
     /* 토스트 알림 */
     .toast {
       position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
-      background: rgba(51, 50, 46, 0.9); color: #fff; padding: 12px 24px; border-radius: 40px;
-      font-size: 12px; letter-spacing: 0.1em; font-weight: 300; pointer-events: none;
-      opacity: 0; transition: opacity 0.4s ease; z-index: 100;
+      background: rgba(0,0,0,0.8); color: #fff; padding: 12px 24px; border-radius: 30px;
+      font-size: 13px; pointer-events: none; opacity: 0; transition: opacity 0.3s; z-index: 100;
     }
     .toast.show { opacity: 1; }
-
-    /* 하단 여백 장식 */
-    .footer-mark {
-      text-align: center; margin-top: 100px; font-size: 10px; color: #D6D3CD; letter-spacing: 0.2em;
-    }
   </style>
 </head>
 <body>
 
-  <div class="mobile-wrap">
+  <div class="container">
     
-    <!-- 1. 메인 커버 -->
-    <section class="cover-section framer-fade">
-      <div class="cover-img-wrap">
-        <!-- [사진 1] 메인 대표 사진 -->
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="메인 웨딩사진" class="cover-img">
-      </div>
-      <p class="cover-date font-serif">2027. 05. 15</p>
-      <h1 class="font-serif cover-title">차제욱 <span>&</span> 신지혜</h1>
-      <p class="cover-location">센텀호텔 4층 벨라홀</p>
-    </section>
-
-    <!-- 2. 인사말 -->
-    <section class="greeting-section">
-      <div class="framer-fade">
-        <h2 class="section-title">Invitation</h2>
-        <p class="font-serif greeting-text">
-          서로 마주 보며 다져온 믿음으로<br>
-          이제 한곳을 바라보며 나아가려 합니다.<br><br>
-          저희 두 사람의 새로운 시작을<br>
-          함께 축복해 주시면<br>
-          더없는 기쁨으로 간직하겠습니다.
-        </p>
-      </div>
-
-      <div class="framer-fade parents-wrap">
-        <div class="parents-row">
-          <span class="parents-name">차용환 &middot; 강수련</span>
-          <span class="parents-relation">의 장남</span>
-          <span class="font-serif person-name">제욱</span>
-        </div>
-        <div class="parents-row">
-          <span class="parents-name">신두범 &middot; 변지영</span>
-          <span class="parents-relation">의 장녀</span>
-          <span class="font-serif person-name">지혜</span>
-        </div>
-        
-        <div class="contact-btns">
-          <a href="tel:01000000000" class="btn-line">신랑측 연락하기</a>
-          <a href="tel:01000000000" class="btn-line">신부측 연락하기</a>
-        </div>
+    <!-- 메인 커버 -->
+    <section class="hero fade-up">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="메인 사진" class="hero-img">
+      <div class="hero-year">2027</div>
+      <div class="hero-date">05.15</div>
+      <div class="hero-info">
+        오후 2시 30분<br>센텀호텔 4층 웨딩홀 벨라홀
       </div>
     </section>
 
-    <!-- 3. 갤러리 -->
-    <section class="framer-fade">
-      <h2 class="section-title">Gallery</h2>
-      <div class="gallery-wrap">
-        <!-- [사진 2~4] 갤러리 스냅 사진 -->
-        <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=600&q=80" class="gallery-item" alt="갤러리 1">
-        <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=600&q=80" class="gallery-item" alt="갤러리 2">
-        <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80" class="gallery-item" alt="갤러리 3">
-      </div>
-    </section>
-
-    <!-- 4. 오시는 길 -->
-    <section class="map-section framer-fade">
-      <h2 class="section-title">Location</h2>
-      <p class="font-serif venue-name">센텀호텔 4층 웨딩홀 벨라홀</p>
-      <p class="venue-address">부산광역시 해운대구 센텀3로 20<br>T. 051-720-8000</p>
+    <!-- 달력 (Save the date) -->
+    <section class="calendar-section fade-up">
+      <div class="section-subtitle">Save the date</div>
+      <div class="section-title">2027년 5월 15일</div>
       
-      <!-- [사진 5] 카카오맵 연동을 위한 빈자리 (현재는 임시 지도 이미지) -->
-      <div class="map-box">
-        <span style="background:rgba(255,255,255,0.9); padding:8px 16px; border-radius:4px; color:#33322E;">지도 API 연동 위치</span>
-      </div>
-
-      <div class="map-links">
-        <a href="https://map.naver.com" class="map-link">네이버지도</a>
-        <a href="https://map.kakao.com" class="map-link">카카오맵</a>
-        <a href="https://tmap.co.kr" class="map-link">티맵</a>
+      <div class="calendar-grid">
+        <div class="cal-header sunday">일</div><div class="cal-header">월</div><div class="cal-header">화</div><div class="cal-header">수</div><div class="cal-header">목</div><div class="cal-header">금</div><div class="cal-header">토</div>
+        
+        <!-- 2027년 5월 달력 구조 -->
+        <div></div><div></div><div></div><div></div><div></div><div></div><div class="cal-day">1</div>
+        <div class="cal-day sunday">2</div><div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div>
+        <div class="cal-day sunday">9</div><div class="cal-day">10</div><div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day wedding-day">15</div>
+        <div class="cal-day sunday">16</div><div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div>
+        <div class="cal-day sunday">23</div><div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div>
+        <div class="cal-day sunday">30</div><div class="cal-day">31</div><div></div><div></div><div></div><div></div><div></div>
       </div>
     </section>
 
-    <!-- 5. 마음 전하실 곳 -->
-    <section class="account-section framer-fade">
-      <h2 class="section-title">Account</h2>
-      <p class="account-notice">
-        참석이 어려우신 분들을 위해<br>축하의 마음을 전할 수 있는 계좌를 안내합니다.
-      </p>
-
-      <div class="account-card">
-        <span class="account-label">신랑측 계좌</span>
-        <div class="account-row">
-          <div>
-            <p class="account-num">국민 123456-04-123456</p>
-            <p class="account-name">예금주: 차제욱</p>
-          </div>
-          <button class="copy-btn" onclick="copyToClipboard('12345604123456')">복사</button>
+    <!-- 혼주 정보 (Invitation) -->
+    <section class="invitation-section fade-up">
+      <div class="section-title">Invitation</div>
+      
+      <div class="parents-box">
+        <div class="parents-group">
+          <div class="parents-names">차용환 &middot; 강수련</div>
+          <div class="parents-relation">의 장남</div>
+          <div class="person-name">제욱</div>
         </div>
-      </div>
-
-      <div class="account-card">
-        <span class="account-label">신부측 계좌</span>
-        <div class="account-row">
-          <div>
-            <p class="account-num">신한 110-123-456789</p>
-            <p class="account-name">예금주: 신지혜</p>
-          </div>
-          <button class="copy-btn" onclick="copyToClipboard('110123456789')">복사</button>
+        <div style="width: 1px; background-color: #eee; margin: 0 10px;"></div>
+        <div class="parents-group">
+          <div class="parents-names">신두범 &middot; 변지영</div>
+          <div class="parents-relation">의 장녀</div>
+          <div class="person-name">지혜</div>
         </div>
       </div>
     </section>
 
-    <div class="footer-mark framer-fade">JEUK & JIHYE</div>
+    <!-- 갤러리 (Our moment) -->
+    <section class="gallery-section fade-up">
+      <div class="section-title">Our moment</div>
+      <div class="gallery-hint">사진을 터치하시면 더 많은 사진을 볼 수 있어요.</div>
+      
+      <div class="gallery-scroll">
+        <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=600&q=80" class="gallery-item" alt="웨딩사진 1">
+        <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=600&q=80" class="gallery-item" alt="웨딩사진 2">
+        <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80" class="gallery-item" alt="웨딩사진 3">
+      </div>
+    </section>
+
+    <!-- 오시는 길 (Location) -->
+    <section class="location-section fade-up">
+      <div class="section-title">오시는길</div>
+      <div style="font-size: 16px; font-weight: 400; margin-bottom: 8px;">센텀호텔 4층 웨딩홀 벨라홀</div>
+      <div style="font-size: 13px; color: #666; font-weight: 300; margin-bottom: 24px;">부산 해운대구 센텀3로 20<br>T. 051-720-8000</div>
+      
+      <!-- 지도 이미지 영역 -->
+      <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80" alt="지도 위치" class="map-img">
+      
+      <div class="map-buttons">
+        <a href="https://map.naver.com" class="map-btn" style="color: #03C75A;">네이버 지도</a>
+        <a href="https://map.kakao.com" class="map-btn" style="color: #392020;">카카오맵</a>
+        <a href="https://tmap.co.kr" class="map-btn">티맵</a>
+      </div>
+
+      <div class="parking-info">
+        <strong style="font-weight: 500; color: #333;">주차 안내</strong><br>
+        센텀호텔 지하 주차장 이용 가능합니다.<br>
+        하객 분들은 2시간 무료 주차 지원됩니다.
+      </div>
+    </section>
+
+    <!-- 마음 전하실 곳 (Account) -->
+    <section class="account-section fade-up">
+      <div class="section-title">마음 전하실 곳</div>
+      <div class="account-notice">
+        참석이 어려우신 분들을 위해<br>계좌번호를 기재하였습니다.<br>너그러운 마음으로 양해 부탁드립니다.
+      </div>
+
+      <!-- 신랑측 -->
+      <div class="account-box">
+        <div class="account-header">
+          <span class="account-title">신랑측 계좌번호</span>
+          <button class="copy-btn" onclick="copyToClipboard('12345604123456')">복사하기</button>
+        </div>
+        <div class="account-num">국민 123456-04-123456</div>
+        <div class="account-name">예금주: 차제욱</div>
+      </div>
+
+      <!-- 신부측 -->
+      <div class="account-box">
+        <div class="account-header">
+          <span class="account-title">신부측 계좌번호</span>
+          <button class="copy-btn" onclick="copyToClipboard('110123456789')">복사하기</button>
+        </div>
+        <div class="account-num">신한 110-123-456789</div>
+        <div class="account-name">예금주: 신지혜</div>
+      </div>
+    </section>
+
+    <!-- 마무리 문구 -->
+    <section class="footer-section fade-up">
+      <div class="footer-text">
+        좋은 일, 힘든 일<br>함께 이겨내며 나아가겠습니다.<br>진심으로 감사드립니다.
+      </div>
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=400&q=80" alt="마무리 사진" style="width: 60%; border-radius: 8px; margin: 0 auto; display: block; aspect-ratio: 3/4; object-fit: cover;">
+    </section>
+
   </div>
 
   <div id="toast" class="toast">복사 완료</div>
 
   <script>
-    // 1. 프레이머 스타일 스크롤 페이드 애니메이션
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.15 // 요소가 15% 보일 때 애니메이션 시작
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
+    // 스크롤 시 부드럽게 나타나는 페이드 효과 (원본 감성 복제)
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          // 한 번 나타난 요소는 계속 보이도록 유지하려면 아래 주석 해제
-          // observer.unobserve(entry.target);
         }
       });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.framer-fade').forEach((el) => {
+    document.querySelectorAll('.fade-up').forEach((el) => {
       observer.observe(el);
     });
 
-    // 2. 모바일 브라우저 클립보드 복사 안정화 로직
+    // 구형 모바일에서도 100% 작동하는 계좌 복사 스크립트
     function copyToClipboard(text) {
       if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(showToast);
